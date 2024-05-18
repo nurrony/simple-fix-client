@@ -1,0 +1,77 @@
+server:
+  port: 8000
+  compression:
+    enabled: true
+  error:
+    whitelabel:
+      enabled: false
+
+# spring application metadata
+spring:
+  application:
+    name: simple-fix-client
+
+---
+# spring datasource, jpa and hibernate configuration
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    defer-datasource-initialization: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        "[generate_statistics]": false
+        "[format_sql]": true
+        type: DEBUG # reset in production
+        jdbc:
+          "[batch_size]": 20
+        id:
+          "[new_generator_mappings]": true
+        connection:
+          "[provider_disables_autocommit]": true
+        # cache:
+        #   "[use_second_level_cache]": true
+        #   "[use_query_cache]": false
+        # enable_lazy_load_no_trans: true
+        event:
+          merge:
+            "[entity_copy_observer]": allow
+    hibernate:
+      ddl-auto: update
+  datasource:
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DATABASE}?currentSchema=client
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      auto-commit: false
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+
+---
+# QuickfixJ settings
+quickfixj:
+  client:
+    enabled: true
+    jmx-enabled: true
+    config: ${QUIICKFIXJ_CLIENT_CONFIG_FILE:classpath:quickfixj-client.cfg}
+    message-store-factory: jdbc
+    log-factory: jdbc
+# QuickfixJ actuator
+management:
+  health:
+    quickfixjclient:
+      enabled: true
+  endpoint:
+    quickfixjclient:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: quickfixjclient
