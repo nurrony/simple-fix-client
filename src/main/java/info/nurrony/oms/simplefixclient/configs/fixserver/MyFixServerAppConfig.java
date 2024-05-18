@@ -2,7 +2,6 @@ package info.nurrony.oms.simplefixclient.configs.fixserver;
 
 import javax.sql.DataSource;
 
-import org.apache.logging.log4j.message.MessageFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,6 +11,7 @@ import quickfix.Initiator;
 import quickfix.JdbcLogFactory;
 import quickfix.JdbcStoreFactory;
 import quickfix.LogFactory;
+import quickfix.MessageFactory;
 import quickfix.MessageStoreFactory;
 import quickfix.SessionSettings;
 import quickfix.ThreadedSocketInitiator;
@@ -21,7 +21,7 @@ public class MyFixServerAppConfig {
 
     @Bean
     public Application clientApplication(final SessionSettings sessionSettings) {
-        return new InvestarQuickfixApplication(sessionSettings);
+        return new MyQuickfixApplication(sessionSettings);
     }
 
     @Bean
