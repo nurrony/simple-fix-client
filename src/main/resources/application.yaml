@@ -32,19 +32,15 @@ spring:
           "[new_generator_mappings]": true
         connection:
           "[provider_disables_autocommit]": true
-        # cache:
-        #   "[use_second_level_cache]": true
-        #   "[use_query_cache]": false
-        # enable_lazy_load_no_trans: true
         event:
           merge:
             "[entity_copy_observer]": allow
     hibernate:
       ddl-auto: update
   datasource:
-    username: ${POSTGRES_USER}
-    password: ${POSTGRES_PASSWORD}
-    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DATABASE}?currentSchema=client
+    username: postgres
+    password: nurrony
+    url: jdbc:postgresql://localhost/fix_oms?currentSchema=client
     driver-class-name: org.postgresql.Driver
     hikari:
       auto-commit: false
