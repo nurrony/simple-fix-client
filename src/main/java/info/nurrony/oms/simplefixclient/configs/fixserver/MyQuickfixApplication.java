@@ -21,7 +21,7 @@ public class MyQuickfixApplication implements Application {
     public void fromApp(Message message, SessionID sessionId)
             throws FieldNotFound, IncorrectDataFormat, IncorrectTagValue, UnsupportedMessageType {
 
-        log.info("fromApp: Message={}, SessionId={}, msgType = {}", message, sessionId, fixMessageClassName);
+        log.info("fromApp: Message={}, SessionId={}, msgType = {}", message, sessionId);
 
     }
 

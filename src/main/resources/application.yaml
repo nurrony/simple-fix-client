@@ -40,7 +40,7 @@ spring:
   datasource:
     username: postgres
     password: nurrony
-    url: jdbc:postgresql://localhost/fix_oms?currentSchema=client
+    url: jdbc:postgresql://localhost/fix_oms
     driver-class-name: org.postgresql.Driver
     hikari:
       auto-commit: false
@@ -61,10 +61,9 @@ quickfixj:
     log-factory: jdbc
 # QuickfixJ actuator
 management:
-  health:
-    quickfixjclient:
-      enabled: true
   endpoint:
+    health:
+      show-details: always
     quickfixjclient:
       enabled: true
   endpoints:
